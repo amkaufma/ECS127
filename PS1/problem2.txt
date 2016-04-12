@@ -1,0 +1,32 @@
+Alice can generate a uniform random bit using her possibly\texttt{-} biased coin by using multiple coin flips to determine
+the bit to be generated. Since Alice knows that the coin most likely has a bias, single coin flips would not accurately represent
+a random environment because one outcome would be more prevalent than the other. In order to achieve a random bit, Alice needs to
+come up with a method that makes the probability of either outcome equal. Alice could achieve this by using an even number of coin
+flips and analyzing the frequency of each outcome. Upon analyzing the outcome, Alice would then assign the bit a value. \\ \\
+For example, if n = 2: \\ \\
+\(\tab\) if equal number of heads and tails \(\rightarrow\) `1' \\
+\(\tab\) else \(\rightarrow\) `0' \\ \\
+\(\tab\) All possible outcomes for n = 2: \\
+\(\tab\)\(\tab\) (HH), (HT), (TH), (TT) where H = heads and T = tails \\ \\
+\(\tab\) Each outcome has the same probability of 0.25 since there are 4 possibilities \\ \\
+\(\tab\) With these outcomes we determine the probabilities of generating a `0' or `1':
+\begin{equation*}
+\(\begin{split}\)
+Pr(Generating a `0') & = Pr(HH \(\cup\) TT) \\
+& = Pr(HH) + Pr(TT) \\
+& = 0.25 + 0.25 \\
+& = 0.5
+\end{split}
+\end{equation*}
+
+
+\begin{equation*}
+\(\begin{split}\)
+Pr(Generating a `1') & = Pr(HT \(\cup\) TH) \\
+& = Pr(HT) + Pr(TH) \\
+& = 0.25 + 0.25 \\
+& = 0.5
+\end{split}
+\end{equation*} \\ \\
+Generating a random bit has been achieved since the probabilities of either a `0'or a `1' are now equal. Alice\textquotesingle s penny
+can now be used to generate a random uniform bit. \\

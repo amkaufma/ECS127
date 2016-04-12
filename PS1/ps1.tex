@@ -1,0 +1,159 @@
+\documentclass[paper=letter, fontsize=12pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage{times}
+\usepackage[english]{babel}
+\usepackage{sectsty}
+\usepackage{textcomp}
+\usepackage{amsmath,amsfonts,amsthm}
+\usepackage{mathtools}
+\usepackage{enumitem}
+
+\newcommand\tab[1][1cm]{\hspace*{#1}}
+
+\allsectionsfont{\centering \normalfont\scshape}
+
+\newcommand{\horrule}[1]{\rule{\linewidth}{#1}}
+\title{
+\normalfont \normalsize
+\horrule{0.5pt} \\[0.3cm]
+\huge Problem Set #1 \\
+\horrule{0.5pt} \\[0.3cm]
+}
+
+\author{Andrew Kaufman \\ SID: 998048873}
+\date{\normalsize\today}
+
+\begin{document}
+\maketitle
+
+\section*{Problem 1}
+When a user \textit{i} uses a password \textit{K} in some cryptographic protocol, system flows will usually
+reveal a pair \textit{(X, Y)} where \textit{Y = F(K, X, i)}. Here \texit{F} is some known, fixed function associated to the
+protocol. Consider a user \textit{i}\textquotesingle s password to be \textit{cracked} if an adversary, given \textit{(X, Y)}, can find some
+key \textit{K} for which \textit{Y = F(K, X, i)}.\\
+\\Attacker Ned has built a large password-cracking machine. Ned used a budget of \$100 million
+for this project, spending half the money on custom chips (ASICs) that, given \texit{(X, Y, i)}, test, for
+a candidate \textit{K}, if \textit{Y = F(K, X, i)}. (The other half of Ned\textquotesingle s budget was used for circuit boards,
+assembly, power, and cooling). The ASICs cost Ned \$10 each and, for some particular \textit{F}, each chip
+can test 10\(^9\) different passwords per second.
+
+\begin{enumerate}[label=(\alph*)]
+    \item Hal, Leo, and Pat have passwords that are reasonably modelled as uniformly random strings of
+    8, 12, and 16 characters, respectively, each character being a lowercase letter (a\texttt{-}z). Attacker Ned
+    gets hold of an \textit{(X, Y)} pair for each user \textit{i}. How long will it take Ned to crack each user\textquotesingle s password?\\
+
+    \\\tab\$50 million spent on ASIC chips \rightarrow
+    \(\dfrac{\$50\cdot 10^{6}}{\$10}\)  =  5\cdot 10\(^6\) chips \\ \\
+    \tab(5\cdot 10\(^6\) chips)(1\cdot 10\(^9\) \(\dfrac{passwords}{second}\))  =  5\cdot 10\(^\(15\)\) \(\dfrac{passwords}{sec}\) \\ \\
+
+    Hal\textquotesingle s password is 8 characters: \\ \\
+    \tab lowercase (a\texttt{-}z) = 26 possibilities for each character \\ \\
+    \tab \rightarrow 26\(^8\) password possibilities \\ \\
+    \tab \(\dfrac{26^{8}}{5\cdot 10^{15}}\) = .000041765 seconds \\ \\
+
+    Lee\textquotesingle s password is 12 characters: \\ \\
+    \tab lowercase (a\texttt{-}z) = 26 possibilities for each character \\ \\
+    \tab \rightarrow 26\(^\(12\)\) password possibilities \\ \\
+    \tab \(\dfrac{26^{12}}{5\cdot 10^{15}}\) = 19.085791332 seconds \\
+
+    Pat\textquotesingle s password is 16 characters: \\ \\
+    \tab lowercase (a\texttt{-}z) = 26 possibilities for each character \\ \\
+    \tab \rightarrow \(26^{16}\) password possibilities \\ \\
+    \tab \(\dfrac{26^{16}}{5\cdot 10^{15}}\) = \(8.72\cdot 10^{6}\) seconds \\ \\
+
+    \item A system administrator comes in and demands that users select passwords that include one
+    uppercase letter (A\texttt{-}Z), one lowercase letter (a\texttt{-}z), and one digit (0\texttt{-}9). Hal, Leo, and Pat change
+    their passwords so that they are now well modelled as having one uppercase letter, one digit, and
+    the rest lowercase letters (same lengths as before). How effective was this change in stopping Ned?
+    (Recompute the attack times.) \\
+
+    Hal\textquotesingle s password: \\ \\
+    \tab Uppercase (A\texttt{-}Z): 26 possibilities \(\cdot\) 8 locations \\ \\
+    \tab Digit (0\textt{-}9): 10 possibilities \(\cdot\) 7 locations \\ \\
+    \tab Lowercase (a\texttt{-}z): \(26^{6}\) possibilities \(\cdot\) 6! arrangements \\ \\
+    \tab \(\dfrac{(26\cdot 8) \cdot (10\cdot 7) \cdot (26^{6}\cdot 6!)}{5\cdot 10^{15}}\) = \(2.22\cdot 10^{11}\) passwords \\ \\
+    \tab \(\dfrac{2.22\cdot 10^{11}}{5\cdot 10^{15}}\) = \(4.44\cdot 10^{-5}\) seconds \\ \\
+
+    Lee\textquotesingle s password: \\ \\
+    \tab Uppercase (A\texttt{-}Z): 26 possibilities \(\cdot\) 12 locations \\ \\
+    \tab Digit (0\textt{-}9): 10 possibilities \(\cdot\) 11 locations \\ \\
+    \tab Lowercase (a\texttt{-}z): \(26^{10}\) possibilities \(\cdot\) 10! arrangements \\ \\
+    \tab \(\dfrac{(26\cdot 12) \cdot (10\cdot 11) \cdot (26^{10}\cdot 10!)}{5\cdot 10^{15}}\) = \(5.12\cdot 10^{20}\) passwords \\ \\
+    \tab \(\dfrac{5.12\cdot 10^{20}}{5\cdot 10^{15}}\) = 102453.4313 seconds \\ \\
+
+    Pat\textquotesingle s password: \\ \\
+    \tab Uppercase (A\texttt{-}Z): 26 possibilities \(\cdot\) 16 locations \\ \\
+    \tab Digit (0\textt{-}9): 10 possibilities \(\cdot\) 15 locations \\ \\
+    \tab Lowercase (a\texttt{-}z): \(26^{14}\) possibilities \(\cdot\) 14! arrangements \\ \\
+    \tab \(\dfrac{(26\cdot 16) \cdot (10\cdot 15) \cdot (26^{14}\cdot 14!)}{5\cdot 10^{15}}\) = \(5.62\cdot 10^{30}\) passwords \\ \\
+    \tab \(\dfrac{5.62\cdot 10^{30}}{5\cdot 10^{15}}\) = \(1.12^{15}\) seconds \\ \\
+
+    These changes were more effective in stopping Ned\textsinglequote s as seen by the increase in times to crack the passwords. For
+    the passwords of shorter lengths, such as Ned\textsinglequote s password, we do not see as much of an increase in difficulty as the longer passwords. \\ \\
+
+    \item A cryptographer comes in and redesigns the function \textit{F} such that \$10 ASICs will now need 100
+    msec to compute it. Hal, Leo, and Pat use their original passwords. How effective is this change in
+    stopping Ned? (Recompute the attack times.) \\ \\
+    \tab 100 msec computation time = 0.100 seconds per password \\ \\
+    \tab \(\rightarrow\) computes 10 passwords per second \\ \\
+    \tab (\(5\cdot \(10^{6}\) chips\))(100 \(\dfrac{passwords}{second}\)) = \(5\cdot 10^{7}\) \(\dfrac{passwords}{second}\) \\ \\
+
+    Hal\textquotesingle s password is 8 characters: \\ \\
+    \tab lowercase (a\texttt{-}z) = 26 possibilities for each character \\ \\
+    \tab \rightarrow 26\(^8\) password possibilities \\ \\
+    \tab \(\dfrac{26^{8}}{5\cdot 10^{7}}\) = 4176.541292 seconds \\ \\
+
+    Lee\textquotesingle s password is 12 characters: \\ \\
+    \tab lowercase (a\texttt{-}z) = 26 possibilities for each character \\ \\
+    \tab \rightarrow 26\(^\(12\)\) password possibilities \\ \\
+    \tab \(\dfrac{26^{12}}{5\cdot 10^{7}}\) = \(1.90\cdot 10^{9}\) seconds \\
+
+    Pat\textquotesingle s password is 16 characters: \\ \\
+    \tab lowercase (a\texttt{-}z) = 26 possibilities for each character \\ \\
+    \tab \rightarrow \(26^{16}\) password possibilities \\ \\
+    \tab \(\dfrac{26^{16}}{5\cdot 10^{7}}\) = \(8.72\cdot 10^{14}\) seconds \\ \\
+
+    This change is effective in stopping Ned since the ASICs are not able to test as many passwords per second. By testing fewer
+    passwords per second, the time needed for Ned to crack the password takes significantly longer. \\ \\
+
+    \item Another cryptographers comes in and modifies the design so that, for every user, the key \textit{K}
+    won’t be a password but a 128-bit random string. How effective is this change in stopping Ned?
+    (Recompute the attack time.)
+
+    \tab single chip computes \rightarrow \(10^{9}\) \(\dfrac{passwords}{second}\) \\ \\
+    \tab (5\cdot\(10^{6}\) chips)(\(10^{9}\) \(\dfrac{passwords}{second}\)) = 5 \cdot \(10^{15}\) \(\dfrac{passwords}{second}\) \\ \\
+    \tab \(2^{128}\) possible passwords \\ \\
+    \tab \(\dfrac{2^{128}}{5 \cdot \(10^{15}\)}\) = 6.80 \cdot \(10^{22}\) seconds \\ \\
+
+    This is effective in stopping Ned once again because although the rate at which passwords are tested is fast, the sample space is so
+    large that a significant amount of time is needed for computation. This time needed for computation proved to be much larger than the
+    previous designs. \\
+\end{enumerate}
+
+\section*{Problem 2}
+Alice has a pretty penny. Unfortunately, it may not be ``fair'' penny: it might, when flipped,
+land heads with some probability \textit{p} \(\neq\) 0.5. Alice wants to generate a uniform random bit \textit{b}: the bit
+should be 1 with probability 0.5 and zero with probability 0.5. Describe a strategy Alice can use
+to achieve this result using her possibly-biased coin. \\ \\
+
+
+
+\section*{Problem 3}
+Alice and Bob have an infinite pile of pennies. They take turns placing their pennies on a
+perfectly round table, beginning with Alice. A penny may be placed anywhere on the table so long
+as all of the penny fits fully on top of the table and no part of the penny is on top of any other
+penny. Pennies must be placed flat on their heads or tails side. A party loses if he has nowhere to
+put his penny. Show that Alice can always win. \\ \\
+Alice can always win when she plays first against Bob. The approach she would need to take in order to win is to
+vary her placement of pennies depending on the available space left on the table. Since pennies cannot overlap one
+another, the placement and distance between pennies is crucial because once there is no longer enough space for a single
+penny, the following player loses. To accomplish this, Alice would begin by placing pennies as close to each other as
+possible and take note of the remaining space on the table following each of Bob's turns. On each of her turns, if there
+is enough room for \(\geq\) 3 pennies, she will continue to place her pennies close enough to each other to maximize
+the remaining space. However, if there is room for \(\leq\) 2 pennies, she will place her penny in the space such that it takes
+up enough room to where Bob has nowhere to place his penny. Since Bob cannot place his penny, Alice wins.
+
+
+
+
+\end{document}
