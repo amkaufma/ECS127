@@ -48,14 +48,19 @@ def bigram():
 
     for i in range(27):
         for j in range(27):
+            if bigrams[i][j] == 0.0:
+                bigrams[i][j] = 1.0
             bigrams[i][j] /= count
-            print(bigrams[i][j])
+            # print(bigrams[i][j])
 
+    return bigrams
 
-
+def decipher(bigrams):
+    
 
 
 def main():
-    bigram()
+    bigrams = bigram()
+    decipher(bigrams)
 
 if __name__ == '__main__': main()
