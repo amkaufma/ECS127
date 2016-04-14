@@ -2,11 +2,11 @@ import math
 import random
 import string
 
-def bernoulli(p):
+def bernoulli(p):                                # simulates random coin flip
     r = random.random()
-    return (r < p)
+    return (r <= p)
 
-def bigram():
+def bigram():                                    # creates matrix of bigram frequencies
     count = 0
     filename = 'war-and-peace.txt'
     bigrams = [[1.0 for x in range(27)] for x in range(27)]
@@ -26,12 +26,13 @@ def bigram():
 
     for i in range(27):
         for j in range(27):
-            bigrams[i][j] /= count
+            bigrams[i][j] /= count              # divide by total number of bigrams to get frequencies
+
 
     return bigrams
 
 
-def permute():
+def permute():          # creates random key f
     s = ''
     arr = [0 for x in range(26)]
     for i in range(26):
@@ -45,10 +46,10 @@ def permute():
         s += c
     return s
 
-def plausability(decipherString, bigrams):
-    pl = 1.0
+def plausability(decipherString, bigrams):      # computes plausability of decipherString
+    pl = 0.0
     for i in range(len(decipherString)):
-        print(pl)
+
         pos1 = 0
         pos2 = 0
 
@@ -58,7 +59,7 @@ def plausability(decipherString, bigrams):
             if decipherString[i + 1].islower():
                 pos2 = string.ascii_lowercase.index(decipherString[i + 1]) + 1
 
-        pl *= bigrams[pos1][pos2]
+        pl += math.log(bigrams[pos1][pos2])
 
     return pl
 
@@ -70,23 +71,23 @@ def decipher(bigrams):
 
     cipherString = ''
 
-    decipher1 = ''
-    decipher2 = ''
-
-
-    with open(cipherFile, 'r') as infile:
+    with open(cipherFile, 'r') as infile:       # reads in ciphertext from file cipher.txt
         for line in infile:
             for i in line:
                 cipherString += i
 
 
-    count = 0
+    count = 0                                   # number of iterations
+    repeat = 0                                  # used as a check when plausability does not converge
+
     while (1):
         count += 1
-        if (count % 1000) == 0:
-            print(count)
+        decipher1 = ''
+        decipher2 = ''
 
-        for i in range(len(cipherString)):
+        print(count)
+
+        for i in range(len(cipherString)):      # deciphers ciphertext using keys f and f2 (which represent f and f*)
             if cipherString[i].islower():
                 decipher1 += string.ascii_lowercase[f.index(cipherString[i])]
                 decipher2 += string.ascii_lowercase[f2.index(cipherString[i])]
@@ -94,26 +95,32 @@ def decipher(bigrams):
                 decipher1 += cipherString[i]
                 decipher2 += cipherString[i]
 
-        plf = math.log(plausability(decipher1, bigrams))
-        plf2 = math.log(plausability(decipher2, bigrams))
+        plf = plausability(decipher1, bigrams)
+        plf2 = plausability(decipher2, bigrams)
 
-        print(plf)
+        if plf == plf2:                         # plausability stuck at local maxima
+            repeat += 1
 
-        print(plf)
+        if repeat == 50 and plf < -2400.0:      # plausability stuck at local maxima and under expected value
+            f = permute()
+            repeat = 0
+
+        print(decipher1)                        # print out plaintext obtained using key f
+
         if plf2 > plf:
             f = f2
             f2 = swap(f)
         else:
-            p = plf2 / plf
-            coin = bernoulli(p)
+            p = plf2 - plf
+            coin = bernoulli(p)                 # perform biased coin flip
 
-            if coin == 1:
+            if coin == 1:                       # if coin is heads
                 f = f2
                 f2 = swap(f)
             else:
                 f2 = swap(f)
 
-def swap(f):
+def swap(f):                                    # performs random transpose of two characters in f
     pos1 = random.randint(0, 25)
     pos2 = random.randint(0, 25)
     s = ''
@@ -138,7 +145,5 @@ def swap(f):
 def main():
     bigrams = bigram()
     decipher(bigrams)
-
-    # print(bigrams[8][5])
 
 if __name__ == '__main__': main()
