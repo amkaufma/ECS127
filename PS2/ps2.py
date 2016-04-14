@@ -2,52 +2,30 @@ import math
 import random
 import string
 
+def bernoulli(p):
+    r = random.random()
+    return (r < p)
 
 def bigram():
     count = 0
     filename = 'war-and-peace.txt'
-    wordArray = []
-    bigrams = [[0.0 for x in range(27)] for x in range(27)]
+    bigrams = [[1.0 for x in range(27)] for x in range(27)]
 
     with open(filename, 'r') as infile:
         for line in infile:
-            line2 = ''
-            for i in line:
-                if i.islower():
-                    line2 += i
-                else:
-                    line2 += ' '
-
-            words = line2.split()
-            for word in words:
-                fixed = ''
-                for i in word:
-                    if i.islower():
-                        fixed += i
-
-                wordArray.append(fixed)
-
-    for word in wordArray:
-        length = len(word)
-
-        position = string.ascii_lowercase.index(word[0])
-        bigrams[0][position] += 1
-        count += 1
-
-        for i in range(length):
-            position = string.ascii_lowercase.index(word[i])
-            position2 = 0
-
-            if i < (length - 1):
-                position2 = string.ascii_lowercase.index(word[i + 1])
-
-            bigrams[position][position2] += 1
-            count += 1
+            for i in range(len(line)):
+                pos1 = 0
+                pos2 = 0
+                if line[i].islower():
+                    pos1 = string.ascii_lowercase.index(line[i]) + 1
+                if (i+1) < len(line):
+                    if line[i+1].islower():
+                      pos2 = string.ascii_lowercase.index(line[i+1]) + 1
+                bigrams[pos1][pos2] += 1
+                count += 1
 
     for i in range(27):
         for j in range(27):
-            if bigrams[i][j] == 0.0:
-                bigrams[i][j] = 1.0
             bigrams[i][j] /= count
 
     return bigrams
@@ -67,62 +45,73 @@ def permute():
         s += c
     return s
 
-def plausability(decipherText, bigrams):
-    pl = 0.0
-    for word in decipherText:
-        length = len(word)
+def plausability(decipherString, bigrams):
+    pl = 1.0
+    for i in range(len(decipherString)):
+        print(pl)
+        pos1 = 0
+        pos2 = 0
 
-        pl = bigrams[0][string.ascii_lowercase.index(word[0])]
-        for i in range(length):
-            p = string.ascii_lowercase.index(word[i])
-            p2 = 0
-            if (i+1) < length:
-                p2 = string.ascii_lowercase.index(word[i+1])
+        if decipherString[i].islower():
+            pos1 = string.ascii_lowercase.index(decipherString[i]) + 1
+        if (i + 1) < len(decipherString):
+            if decipherString[i + 1].islower():
+                pos2 = string.ascii_lowercase.index(decipherString[i + 1]) + 1
 
-            pl *= bigrams[p][p2]
+        pl *= bigrams[pos1][pos2]
 
     return pl
 
 def decipher(bigrams):
     cipherFile = 'cipher.txt'
-    f = permute()
-    f2 = ''
 
-    cipherText = []
-    decipherText = []
+    f = permute()
+    f2 = swap(f)
+
+    cipherString = ''
+
+    decipher1 = ''
+    decipher2 = ''
 
 
     with open(cipherFile, 'r') as infile:
         for line in infile:
-            line2 = ''
             for i in line:
-                if i.islower():
-                    line2 += i
-                else:
-                    line2 += ' '
-
-            words = line2.split()
-            for word in words:
-                fixed = ''
-                for i in word:
-                    if i.islower():
-                        fixed += i
-
-                cipherText.append(fixed)
+                cipherString += i
 
 
-    for i in range(5000):
-        for word in cipherText:
-            temp = ''
-            for c in word:
-                temp += (string.ascii_lowercase[f.index(c)])
+    count = 0
+    while (1):
+        count += 1
+        if (count % 1000) == 0:
+            print(count)
 
-            decipherText.append(temp)
+        for i in range(len(cipherString)):
+            if cipherString[i].islower():
+                decipher1 += string.ascii_lowercase[f.index(cipherString[i])]
+                decipher2 += string.ascii_lowercase[f2.index(cipherString[i])]
+            else:
+                decipher1 += cipherString[i]
+                decipher2 += cipherString[i]
 
-        plf = plausability(decipherText, bigrams)
-        f2 = swap(f)
+        plf = math.log(plausability(decipher1, bigrams))
+        plf2 = math.log(plausability(decipher2, bigrams))
 
+        print(plf)
 
+        print(plf)
+        if plf2 > plf:
+            f = f2
+            f2 = swap(f)
+        else:
+            p = plf2 / plf
+            coin = bernoulli(p)
+
+            if coin == 1:
+                f = f2
+                f2 = swap(f)
+            else:
+                f2 = swap(f)
 
 def swap(f):
     pos1 = random.randint(0, 25)
