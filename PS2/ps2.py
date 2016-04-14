@@ -2,11 +2,13 @@ import math
 import random
 import string
 
-def bernoulli(p):                                # simulates random coin flip
+# simulates random coin flip
+def bernoulli(p):
     r = random.random()
     return (r <= p)
 
-def bigram():                                    # creates matrix of bigram frequencies
+# creates matrix of bigram frequencies
+def bigram():
     count = 0
     filename = 'war-and-peace.txt'
     bigrams = [[1.0 for x in range(27)] for x in range(27)]
@@ -26,13 +28,14 @@ def bigram():                                    # creates matrix of bigram freq
 
     for i in range(27):
         for j in range(27):
-            bigrams[i][j] /= count              # divide by total number of bigrams to get frequencies
+            bigrams[i][j] /= count              # convert to frequencies
 
 
     return bigrams
 
 
-def permute():          # creates random key f
+# creates random key f
+def permute():
     s = ''
     arr = [0 for x in range(26)]
     for i in range(26):
@@ -46,7 +49,9 @@ def permute():          # creates random key f
         s += c
     return s
 
-def plausability(decipherString, bigrams):      # computes plausability of decipherString
+
+# computes plausibility of decipherString
+def plausibility(decipherString, bigrams):
     pl = 0.0
     for i in range(len(decipherString)):
 
@@ -63,6 +68,7 @@ def plausability(decipherString, bigrams):      # computes plausability of decip
 
     return pl
 
+
 def decipher(bigrams):
     cipherFile = 'cipher.txt'
 
@@ -71,14 +77,14 @@ def decipher(bigrams):
 
     cipherString = ''
 
-    with open(cipherFile, 'r') as infile:       # reads in ciphertext from file cipher.txt
+    with open(cipherFile, 'r') as infile:       # ciphertext from file cipher.txt
         for line in infile:
             for i in line:
                 cipherString += i
 
 
     count = 0                                   # number of iterations
-    repeat = 0                                  # used as a check when plausability does not converge
+    repeat = 0
 
     while (1):
         count += 1
@@ -87,7 +93,7 @@ def decipher(bigrams):
 
         print(count)
 
-        for i in range(len(cipherString)):      # deciphers ciphertext using keys f and f2 (which represent f and f*)
+        for i in range(len(cipherString)):      # decipher using keys f and f2
             if cipherString[i].islower():
                 decipher1 += string.ascii_lowercase[f.index(cipherString[i])]
                 decipher2 += string.ascii_lowercase[f2.index(cipherString[i])]
@@ -95,17 +101,17 @@ def decipher(bigrams):
                 decipher1 += cipherString[i]
                 decipher2 += cipherString[i]
 
-        plf = plausability(decipher1, bigrams)
-        plf2 = plausability(decipher2, bigrams)
+        plf = plausibility(decipher1, bigrams)
+        plf2 = plausibility(decipher2, bigrams)
 
-        if plf == plf2:                         # plausability stuck at local maxima
+        if plf == plf2:                         # plausibility stuck at local maxima
             repeat += 1
 
-        if repeat == 50 and plf < -2400.0:      # plausability stuck at local maxima and under expected value
+        if repeat == 50 and plf < -2400.0:      # get new key f
             f = permute()
             repeat = 0
 
-        print(decipher1)                        # print out plaintext obtained using key f
+        print(decipher1)                        # print plaintext created from key f
 
         if plf2 > plf:
             f = f2
@@ -120,7 +126,9 @@ def decipher(bigrams):
             else:
                 f2 = swap(f)
 
-def swap(f):                                    # performs random transpose of two characters in f
+
+# performs random transpose of two characters in f
+def swap(f):
     pos1 = random.randint(0, 25)
     pos2 = random.randint(0, 25)
     s = ''
