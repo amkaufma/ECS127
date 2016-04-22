@@ -2,6 +2,7 @@ import math
 import random
 import string
 
+# run using python3
 # simulates random coin flip
 def bernoulli(p):
     r = random.random()
