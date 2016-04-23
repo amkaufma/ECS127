@@ -130,9 +130,6 @@ INPUT c:/texlive/2015/texmf-dist/fonts/tfm/adobe/times/ptmr8t.tfm
 INPUT c:/texlive/2015/texmf-dist/fonts/tfm/adobe/times/ptmb8t.tfm
 INPUT c:/texlive/2015/texmf-dist/fonts/tfm/adobe/times/ptmrc8t.tfm
 INPUT c:/texlive/2015/texmf-dist/fonts/tfm/adobe/times/ptmri8t.tfm
-INPUT c:/texlive/2015/texmf-dist/tex/latex/psnfss/ts1ptm.fd
-INPUT c:/texlive/2015/texmf-dist/tex/latex/psnfss/ts1ptm.fd
-INPUT c:/texlive/2015/texmf-dist/fonts/tfm/adobe/times/ptmr8c.tfm
 INPUT c:/texlive/2015/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm
 INPUT c:/texlive/2015/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm
 INPUT c:/texlive/2015/texmf-dist/fonts/tfm/public/amsfonts/symbols/msam10.tfm
@@ -141,8 +138,6 @@ INPUT c:/texlive/2015/texmf-dist/fonts/tfm/public/amsfonts/symbols/msam5.tfm
 INPUT c:/texlive/2015/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm10.tfm
 INPUT c:/texlive/2015/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm7.tfm
 INPUT c:/texlive/2015/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm5.tfm
-INPUT ps3.py
-INPUT ps3.py
 INPUT ps3.py
 OUTPUT ps3.pdf
 INPUT c:/texlive/2015/texmf-dist/fonts/vf/adobe/times/ptmr8t.vf
@@ -155,13 +150,13 @@ INPUT c:/texlive/2015/texmf-dist/fonts/tfm/adobe/times/ptmr8r.tfm
 INPUT c:/texlive/2015/texmf-dist/fonts/vf/adobe/times/ptmrc8t.vf
 INPUT c:/texlive/2015/texmf-dist/fonts/tfm/adobe/times/ptmr8r.tfm
 INPUT c:/texlive/2015/texmf-dist/fonts/tfm/adobe/times/ptmr8r.tfm
+INPUT ps3.py
+INPUT ps3.py
 INPUT c:/texlive/2015/texmf-dist/fonts/vf/adobe/times/ptmri8t.vf
 INPUT c:/texlive/2015/texmf-dist/fonts/tfm/adobe/times/ptmri8r.tfm
-INPUT c:/texlive/2015/texmf-dist/fonts/vf/adobe/times/ptmr8c.vf
 INPUT ps3.aux
 INPUT c:/texlive/2015/texmf-dist/fonts/enc/dvips/base/8r.enc
-INPUT c:/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb
-INPUT c:/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb
-INPUT c:/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb
+INPUT c:/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb
+INPUT c:/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb
 INPUT c:/texlive/2015/texmf-dist/fonts/type1/urw/times/utmr8a.pfb
 INPUT c:/texlive/2015/texmf-dist/fonts/type1/urw/times/utmri8a.pfb

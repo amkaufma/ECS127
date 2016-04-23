@@ -29,14 +29,35 @@
 
 \section*{Problem 5}
 \begin{enumerate}[label=(\alph*)]
-  \item Alice shuffles a deck of cards and deals it out to herself and Bob so that each gets half of the
-  52 cards. Alice now wishes to send a secret message \textit{M} to Bob. Eavesdropper Eve is watching and sees
-  the transmissions. \\ \\
-  Suppose Alice\textquotesingle s message M \epsilon \(\(\{\)0, 1\(\}\)^\(48\)\) is a string of 48 bits. Describe how Alice can communicate M to
-  Bob in a way that achieves perfect privacy. \\ \\
-
+\item
+\item
+\item
+\end{enumerate}
 
 \section*{Problem 6}
+
+The following probabilities were obtained after running the RC4 algorithm for 100000 iterations: \\ \\
+\tab 0: 0.00815 \\
+\tab 1: 0.00386 \\
+\tab 2: 0.00393 \\
+\tab 3: 0.0036 \\
+\tab 4: 0.00416 \\
+\tab 5: 0.00393 \\
+\tab 6: 0.00417 \\
+\tab 7: 0.00374 \\
+\tab 8: 0.00368 \\
+\tab 9: 0.00384 \\ \\
+A simple adversary can attempt to distinguish RC4 output from truly random bits by looking at the second byte of the output
+and outputting a 1 if the second byte is 0, or outputting a 0 otherwise. If the adversary returns a 1 the output is interpreted
+as true RC4 output The reason we have the adversary doing this is because the probability of the second byte being 0 is much
+larger than the probabilities of the other possible values. If the second byte is a 0, it is more probable to be real RC4 output. \\ \\
+The advantage of the adversary can then be defined as follows: \\ \\
+\tab \tab \textit{Adv(A)} = \big[Pr[A(F) = 1] - Pr[A(G) = 1]\big] \\ \\
+where F denotes the algorithm for RC4 output and G denotes the algorithm for random bits. \\ \\
+The advantage of the adversary that we described would then be: \\ \\
+\tab \tab \textit{Adv(A)} = \(\dfrac{2}{256}\) - \(\dfrac{1}{156}\) = \(\dfrac{1}{256}\) \\ \\
 \lstinputlisting{ps3.py}
+
+\section*{Problem 7}
 
 \end{document}
