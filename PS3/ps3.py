@@ -54,8 +54,9 @@ def main():
         if 0 <= K[1] <= 9:
             table[K[1]] += 1
 
+    sum = 0
     for j in range(10):
-        table[j] /= 10000
+        table[j] /= 100000
         print(str(j) + ": " + str(table[j]))
 
 if __name__ == '__main__' : main()

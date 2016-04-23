@@ -7,6 +7,7 @@
 \usepackage{amsmath,amsfonts,amsthm}
 \usepackage{mathtools}
 \usepackage{enumitem}
+\usepackage{listings}
 
 \newcommand\tab[1][1cm]{\hspace*{#1}}
 
@@ -28,8 +29,14 @@
 
 \section*{Problem 5}
 \begin{enumerate}[label=(\alph*)]
-  \item Alice would like to privately send a bit a \epsilon \({\)0, 1\(}\) to Bob. They share a uniformly random
-  key k ∈ {0, 1, 2}. How can Alice send her bit to Bob in a way that achieves the property we called perfect
-  privacy? Justify your answer.
+  \item Alice shuffles a deck of cards and deals it out to herself and Bob so that each gets half of the
+  52 cards. Alice now wishes to send a secret message \textit{M} to Bob. Eavesdropper Eve is watching and sees
+  the transmissions. \\ \\
+  Suppose Alice\textquotesingle s message M \epsilon \(\(\{\)0, 1\(\}\)^\(48\)\) is a string of 48 bits. Describe how Alice can communicate M to
+  Bob in a way that achieves perfect privacy. \\ \\
+
+
+\section*{Problem 6}
+\lstinputlisting{ps3.py}
 
 \end{document}

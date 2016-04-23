@@ -1,0 +1,9 @@
+\item Alice would like to privately send a bit a \(\epsilon\) \(\{\)0, 1\(\}\) to Bob. They share a uniformly random
+key k \(\epsilon\) \(\{\)0, 1, 2\(\}\). How can Alice send her bit to Bob in a way that achieves the property we called perfect
+privacy? Justify your answer. \\ \\ \\
+Alice can send her bit to Bob privately by using the following encryption scheme: \\ \\
+For a randomly chosen key k \(\epsilon\) \(\{\)0, 1, 2\(\}\), we could encrypt the bit a \(\epsilon\) \(\{\)0, 1\(\}\)
+by adding the chosen key to the value of the bit and performing modulo 3 on the result. In doing this, the possible values for
+the ciphertext that could be sent to Bob would be \(\{\)0, 1, 2\(\}\). \\ \\
+Upon receiving this ciphertext, Bob would be able to decrypt it by subtracting the key from the ciphertext and then performing
+modulo 3 on the result of the subtraction. After performing this operation we would end up with the original bit a \(\epsilon\) \(\{\)0, 1\(\}\).
